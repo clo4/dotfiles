@@ -14,6 +14,9 @@ Plug 'tpope/vim-vinegar'
 " Git commands
 Plug 'tpope/vim-fugitive'
 
+" Add comments easily
+Plug 'tpope/vim-commentary'
+
 " A nice theme, based on gruvbox
 Plug 'sainnhe/gruvbox-material'
 
@@ -33,11 +36,11 @@ Plug 'ellisonleao/glow.nvim', {'branch': 'main'}
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
 " LSP shit
-Plug 'neovim/nvim-lspconfig'		" Easy-ish LSP config
-Plug 'hrsh7th/nvim-cmp'				 " Autocompletions
-Plug 'hrsh7th/cmp-nvim-lsp'		 " nvim-lsp completion provider
-Plug 'windwp/nvim-autopairs'		" Automatic bracket pairs
-Plug 'simrat39/rust-tools.nvim' " Enhanced Rust support
+Plug 'neovim/nvim-lspconfig'	" Easy-ish LSP config
+Plug 'hrsh7th/nvim-cmp'		 " Autocompletions
+Plug 'hrsh7th/cmp-nvim-lsp'	 " nvim-lsp completion provider
+Plug 'windwp/nvim-autopairs'	" Automatic bracket pairs
+"Plug 'simrat39/rust-tools.nvim' " Enhanced Rust support
 
 " Telescope
 Plug 'nvim-lua/plenary.nvim'
@@ -105,7 +108,7 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<Return>', opts)
 	buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<Return>', opts)
 	buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<Return>', opts)
-	buf_set_keymap('n', 'ge', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<Return>', opts)
+	buf_set_keymap('n', 'ge', '<cmd>lua vim.diagnostic.open_float()<Return>', opts)
 	buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<Return>', opts)
 	buf_set_keymap('i', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<Return>', opts)
 	buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<Return>', opts)
@@ -123,13 +126,31 @@ local on_attach = function(client, bufnr)
 end
 
 -- Some servers are simple enough to initialize automatically
-local servers = { 'rust_analyzer', 'pyright', 'vimls' }
+local servers = { 'pyright', 'vimls' }
 for _, ls in ipairs(servers) do
 	lspconfig[ls].setup {
 		on_attach = on_attach,
 		capabilities = capabilities,
 	}
 end
+
+lspconfig.rust_analyzer.setup({
+	on_attach=on_attach,
+	settings = {
+		["rust-analyzer"] = {
+			assist = {
+				importGranularity = "module",
+				importPrefix = "self",
+			},
+			cargo = {
+				loadOutDirsFromCheck = true
+			},
+			procMacro = {
+				enable = true
+			},
+		}
+	}
+})
 
 lspconfig.denols.setup {
 	on_attach = on_attach,
@@ -227,8 +248,8 @@ ts.setup {
 
 -- Set up rust-tools
 
-local rusttools = require 'rust-tools'
-rusttools.setup {}
+--local rusttools = require 'rust-tools'
+--rusttools.setup {}
 
 -- Set up autopairs
 

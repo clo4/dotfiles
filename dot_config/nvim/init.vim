@@ -24,10 +24,7 @@ set cmdheight=2
 " Show absolute line number of current line, above/below are relative
 set number relativenumber
 
-" Wrapped lines count towards the line number count
-set cpoptions+=n
-
-" Sometimes it's nice to click, sue me
+" Enable mouse support. Sometimes it's nice to click, sue me
 set mouse=a
 
 " Search as you type
@@ -128,6 +125,9 @@ let &backupdir = stdpath('data') . "/backup"
 " Use tree-style browsing
 let g:netrw_liststyle = 3
 
+" Change the default netrw buffer settings to have line numbers
+let g:netrw_bufsettings = 'nu rnu noma nomod nowrap ro nobl'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " C-l clears highlighting
@@ -159,6 +159,23 @@ nnoremap <expr> j v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
 nnoremap <expr> k v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
 vnoremap <expr> j v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
 vnoremap <expr> k v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
+
+" Escape exits terminal
+tnoremap <Esc> <C-\><C-n>
+
+" Alt-hjkl moves between panes
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
 let mapleader = " "
 
