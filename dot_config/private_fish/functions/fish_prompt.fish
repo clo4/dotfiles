@@ -1,21 +1,10 @@
 function fish_prompt
-	set -l saved_status $status
+	set saved_status $status
 
-	# if set -q PIN_PROMPT_NEW_LINE
-	# 	echo
-	# end
-	# if not set -q PIN_PROMPT_DISABLE
-	# 	tput cup $LINES
-	# 	set --erase --global _pin_prompt_clear_screen
-	# else if not set -q _pin_prompt_clear_screen
-	# 	set --global _pin_prompt_clear_screen
-	# 	clear
-	# end
+	set cwd (pwd)
+	set friendly_dir (string replace $HOME '~' $cwd)
 
-	set -l cwd (pwd)
-	set -l friendly_dir (string replace $HOME '~' $cwd)
-
-	echo -ne '\n\n'
+  echo -ne '\n'
 
 	set_color blue
 	echo $friendly_dir
@@ -25,6 +14,7 @@ function fish_prompt
 	else
 		set_color red
 	end
+
 	echo -n '$ '
 	set_color normal
 end
