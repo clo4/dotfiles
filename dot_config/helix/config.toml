@@ -1,0 +1,14 @@
+theme = "gruvbox_robert"
+
+[editor]
+line-number = "relative"
+
+[editor.whitespace.render]
+tab = "all"
+space = "all"
+
+[editor.lsp]
+display-messages = true
+
+[editor.cursor-shape]
+insert = "bar"
