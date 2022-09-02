@@ -1,0 +1,41 @@
+[user]
+	name = Robert
+	email = 52195359+SeparateRecords@users.noreply.github.com
+	signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJObPg/tRw9tsblOpENWGOcIUkDjgpfk333uq6BWsO6K
+
+[core]
+	excludesFile = ~/.gitignore
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+	gpgsign = true
+
+[init]
+	defaultBranch = main
+
+[alias]
+	s = status
+	st = status
+	c = commit
+	br = branch
+	sw = switch
+	mk = switch -c
+	where = rev-parse --show-toplevel
+	graph = log --all --decorate --oneline --graph
+
+[pull]
+	rebase = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[push]
+	autoSetupRemote = true

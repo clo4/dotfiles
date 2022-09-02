@@ -1,16 +1,15 @@
+# Changes the cursor and selection colors
 theme = "gruvbox_robert"
 
 [editor]
 line-number = "relative"
 completion-trigger-len = 1
+idle-timeout = 0
 true-color = true
-
-# [editor.whitespace]
-# render = "all"
+cursorline = true
+color-modes = true
 
 [editor.whitespace.render]
-space = "all"
-tab = "all"
 newline = "all"
 
 [editor.whitespace.characters]
@@ -22,16 +21,23 @@ display-messages = true
 [editor.cursor-shape]
 insert = "bar"
 
-# Copying some Vim/NeoVim mappings to make me a little happier
+[editor.indent-guides]
+render = true
+character = "▏"
+
+[editor.file-picker]
+ignore = false
+hidden = false
+
 [keys.normal]
-C-r = "redo"
-0 = "goto_line_start"
-D = ["collapse_selection", "extend_to_line_end", "delete_selection"]
-C-f = "file_picker"
+# "Select inner line", mirrors x's "select a line"
+X = ["goto_first_nonwhitespace", "select_mode", "goto_line_end", "normal_mode"]
+
+[keys.select]
+";" = ["collapse_selection", "normal_mode"]
 
 [keys.normal.space]
 d = ":buffer-close"
 
-# Like an IDE :)
 [keys.insert]
 C-space = "completion"
