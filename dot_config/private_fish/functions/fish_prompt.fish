@@ -1,10 +1,9 @@
 function fish_prompt
 	set saved_status $status
 
-	set cwd (pwd)
-	set friendly_dir (string replace $HOME '~' $cwd)
+	set friendly_dir (string replace $HOME '~' $PWD)
 
-  echo -ne '\n'
+	echo -ne '\n'
 
 	set_color blue
 	echo $friendly_dir
