@@ -18,6 +18,7 @@ newline = "↵"
 
 [editor.lsp]
 display-messages = true
+display-signature-help-docs = false
 
 [editor.cursor-shape]
 insert = "bar"
@@ -50,6 +51,19 @@ C-l = ["collapse_selection", "select_mode", "goto_line_end", "delete_selection"]
 
 # Reload the current document from disk
 C-r = ":reload"
+
+# Use L/R arrow keys to switch between buffers, visible in the bufferline
+left = ":buffer-previous"
+right = ":buffer-next"
+
+# 
+A-f = ":format"
+
+[keys.normal."]"]
+b = ":buffer-next"
+
+[keys.normal."["]
+b = ":buffer-previous"
 
 [keys.normal.space]
 # Closing the buffer is something I should do more often

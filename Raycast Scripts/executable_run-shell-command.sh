@@ -15,4 +15,7 @@
 # @raycast.authorURL https://github.com/SeparateRecords
 
 # @raycast.argument1 { "type": "text", "placeholder": "Command" }
-eval "$1"
+
+#eval "$1"
+cd "$HOME"
+zsh -ic "$1"
